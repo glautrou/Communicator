@@ -5,6 +5,7 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var sassMiddleware = require("node-sass-middleware");
+var mongoose = require("mongoose");
 
 var index = require("./routes/index");
 var applications = require("./routes/applications");
@@ -50,6 +51,22 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+//DB setup
+//mongoose.connect("mongodb://mongo:27017");
+mongoose.connect("mongodb://0.0.0.0:27017/communicator", function(err) {
+  // If no error, successfully connected
+  if (err) console.log(err);
+});
+mongoose.connection.on("connected", function() {
+  console.log("Mongo connected");
+});
+mongoose.connection.on("error", function() {
+  console.log("Mongo error");
+});
+mongoose.connection.on("disconnected", function() {
+  console.log("Mongo disconnected");
 });
 
 module.exports = app;
