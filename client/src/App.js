@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { Route, Switch, Link, NavLink } from "react-router-dom";
 import Applications from "./Applications.js";
 import CssBaseline from "material-ui/CssBaseline";
 import { withStyles } from "material-ui/styles";
@@ -77,16 +78,36 @@ class App extends Component {
             textColor="secondary"
             centered
           >
-            <Tab icon={<FolderIcon />} label="Applications" />
-            <Tab icon={<FavoriteIcon />} label="FAVORITES" />
-            <Tab icon={<PersonPinIcon />} label="NEARBY" />
+            <Tab
+              icon={<FolderIcon />}
+              label="Applications"
+              component={NavLink}
+              to="/"
+              activeClassName="active"
+            />
+            <Tab
+              icon={<FavoriteIcon />}
+              label="About"
+              component={NavLink}
+              to="/about"
+              activeClassName="active"
+            />
           </Tabs>
         </Paper>
 
-        <Applications />
+        <Switch>
+          <Route exact path="/" component={Applications} />
+          <Route path="/about" component={About} />
+        </Switch>
       </div>
     );
   }
 }
+
+const About = () => (
+  <div>
+    <h2>About</h2>
+  </div>
+);
 
 export default withStyles(styles)(App);
