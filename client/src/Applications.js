@@ -1,4 +1,37 @@
 import React, { Component } from "react";
+import { withStyles } from "material-ui/styles";
+import Badge from "material-ui/Badge";
+import Grid from "material-ui/Grid";
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from "material-ui/Table";
+import Paper from "material-ui/Paper";
+import Typography from "material-ui/Typography";
+
+const styles = theme => ({
+  root: {
+    width: "100%",
+    marginTop: theme.spacing.unit * 3,
+    overflowX: "auto"
+  },
+  table: {
+    maxWidth: 700
+  },
+  row: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.background.default
+    },
+    "&:hover": {
+      backgroundColor: "#BBBBBB"
+    }
+  },
+  cell: {
+    textAlign: "center"
+  }
+});
 
 class Applications extends Component {
   constructor(props) {
@@ -17,17 +50,63 @@ class Applications extends Component {
   render() {
     return (
       <div>
-        <h2>Applications:</h2>
-        <ul>
-          {this.state.applications.map(application => (
-            <li key={application._id}>
-              {application.name} ({application._id})
-            </li>
-          ))}
-        </ul>
+        <h2>Applications</h2>
+        <Paper className={this.props.classes.root}>
+          <Table className={this.props.classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell className={this.props.classes.cell}>#</TableCell>
+                <TableCell className={this.props.classes.cell}>Name</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.applications.map(application => {
+                return (
+                  <TableRow
+                    key={application._id}
+                    className={this.props.classes.row}
+                  >
+                    <TableCell className={this.props.classes.cell}>
+                      {application._id}
+                    </TableCell>
+                    <TableCell className={this.props.classes.cell}>
+                      {application.name}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
+
+        <div>
+          <Grid container spacing={24}>
+            <Grid item xs={12}>
+              <Paper>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper>xs=12 sm=6</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper>xs=12 sm=6</Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Paper>xs=6 sm=3</Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Paper>xs=6 sm=3</Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Paper>xs=6 sm=3</Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Paper>xs=6 sm=3</Paper>
+            </Grid>
+          </Grid>
+        </div>
       </div>
     );
   }
 }
 
-export default Applications;
+export default withStyles(styles)(Applications);

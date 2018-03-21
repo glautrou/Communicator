@@ -2,22 +2,91 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Applications from "./Applications.js";
+import CssBaseline from "material-ui/CssBaseline";
+import { withStyles } from "material-ui/styles";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
+import Button from "material-ui/Button";
+import IconButton from "material-ui/IconButton";
+import MenuIcon from "material-ui-icons/Menu";
+import Paper from "material-ui/Paper";
+import Tabs, { Tab } from "material-ui/Tabs";
+import FolderIcon from "material-ui-icons/Folder";
+import FavoriteIcon from "material-ui-icons/Favorite";
+import PersonPinIcon from "material-ui-icons/PersonPin";
+
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  flex: {
+    flex: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  }
+};
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+  }
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <CssBaseline />
+        <div className={this.props.classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                className={this.props.classes.menuButton}
+                color="inherit"
+                aria-label="Menu"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="title"
+                color="inherit"
+                className={this.props.classes.flex}
+              >
+                <img src={logo} className="App-logo" alt="logo" />
+                <h1 className="App-title">Welcome to Communicator</h1>
+              </Typography>
+              <Button color="inherit">Login</Button>
+            </Toolbar>
+          </AppBar>
+        </div>
+
+        <Paper fullWidth>
+          <Tabs
+            value={this.state.value}
+            onChange={this.handleChange}
+            fullWidth
+            indicatorColor="secondary"
+            textColor="secondary"
+            centered
+          >
+            <Tab icon={<FolderIcon />} label="Applications" />
+            <Tab icon={<FavoriteIcon />} label="FAVORITES" />
+            <Tab icon={<PersonPinIcon />} label="NEARBY" />
+          </Tabs>
+        </Paper>
+
         <Applications />
       </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
