@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var sassMiddleware = require("node-sass-middleware");
 var mongoose = require("mongoose");
+const config = require("./config");
 
 var index = require("./routes/index");
 var applications = require("./routes/applications");
@@ -55,7 +56,7 @@ app.use(function(err, req, res, next) {
 
 //DB setup
 //mongoose.connect("mongodb://mongo:27017");
-mongoose.connect("mongodb://0.0.0.0:27017/communicator", function(err) {
+mongoose.connect(config.mongoUri, function(err) {
   // If no error, successfully connected
   if (err) console.log(err);
 });
