@@ -98,6 +98,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Applications} />
           <Route path="/about" component={About} />
+          <Route component={Error404} />
         </Switch>
       </div>
     );
@@ -107,6 +108,12 @@ class App extends Component {
 const About = () => (
   <div>
     <h2>About</h2>
+  </div>
+);
+
+const Error404 = () => (
+  <div>
+    <h2>404 - Page not found :(</h2>
   </div>
 );
 
