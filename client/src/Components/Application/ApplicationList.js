@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import Badge from "material-ui/Badge";
 import Grid from "material-ui/Grid";
@@ -33,7 +34,7 @@ const styles = theme => ({
   }
 });
 
-class Applications extends Component {
+class ApplicationList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,6 +52,7 @@ class Applications extends Component {
     return (
       <div>
         <h2>Applications</h2>
+        <Link to="/applications/add">Add new application</Link>
         <Paper className={this.props.classes.root}>
           <Table className={this.props.classes.table}>
             <TableHead>
@@ -109,4 +111,4 @@ class Applications extends Component {
   }
 }
 
-export default withStyles(styles)(Applications);
+export default withStyles(styles)(ApplicationList);
