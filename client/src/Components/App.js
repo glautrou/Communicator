@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Route, Switch, Link, NavLink } from "react-router-dom";
-import Applications from "./Applications.js";
+import ApplicationList from "./Application/ApplicationList.js";
 import CssBaseline from "material-ui/CssBaseline";
 import { withStyles } from "material-ui/styles";
 import AppBar from "material-ui/AppBar";
@@ -96,7 +96,7 @@ class App extends Component {
         </Paper>
 
         <Switch>
-          <Route exact path="/" component={Applications} />
+          <Route exact path="/" component={ApplicationList} />
           <Route path="/about" component={About} />
           <Route component={Error404} />
         </Switch>
