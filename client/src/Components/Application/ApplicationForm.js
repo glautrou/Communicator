@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import PropTypes from "prop-types";
 import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
 
 const styles = theme => ({});
 
@@ -45,7 +46,8 @@ class ApplicationForm extends Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = event => {
+    event.preventDefault();
     const errors = this.validate(this.state.name);
     var isValid = true;
     for (var error in errors) if (errors[error]) isValid = false;
@@ -72,7 +74,9 @@ class ApplicationForm extends Component {
             onBlur={this.handleBlur("name")}
             margin="normal"
           />
-          <input type="submit" value="Submit" />
+          <Button type="submit" variant="raised" color="primary">
+            Submit
+          </Button>
         </form>
       </div>
     );
