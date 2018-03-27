@@ -22,19 +22,15 @@ class ApplicationForm extends Component {
     });
   };
 
-  handleSubmit = (event, value) => {
-    event.preventDefault();
-    const { name } = this.state;
-    fetch("/applications", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name
-      })
-    });
+  handleSubmit = () => {
+    //TODO: Validate form
+    var isValid = this.state.name !== "";
+
+    if (isValid) {
+      this.props.onSubmit(this.state);
+    } else {
+      alert("invalid data");
+    }
   };
 
   render() {
