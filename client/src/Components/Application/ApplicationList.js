@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ApplicationDeleteButton from "./ApplicationDeleteButton.js";
 import { Link } from "react-router-dom";
 import { withStyles } from "material-ui/styles";
 import Badge from "material-ui/Badge";
@@ -48,6 +49,16 @@ class ApplicationList extends Component {
       .then(applications => this.setState({ applications }));
   }
 
+  deleteApplication = id => {
+    fetch(`/applications/{id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    });
+  };
+
   render() {
     return (
       <div>
@@ -59,6 +70,7 @@ class ApplicationList extends Component {
               <TableRow>
                 <TableCell className={this.props.classes.cell}>#</TableCell>
                 <TableCell className={this.props.classes.cell}>Name</TableCell>
+                <TableCell className={this.props.classes.cell} />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -73,6 +85,12 @@ class ApplicationList extends Component {
                     </TableCell>
                     <TableCell className={this.props.classes.cell}>
                       {application.name}
+                    </TableCell>
+                    <TableCell className={this.props.classes.cell}>
+                      <ApplicationDeleteButton
+                        name={application.name}
+                        onSubmit={this.deleteApplication}
+                      />
                     </TableCell>
                   </TableRow>
                 );
