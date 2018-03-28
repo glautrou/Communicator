@@ -6,7 +6,7 @@ const styles = theme => ({});
 class ApplicationAdd extends Component {
   handleAddSubmit = data => {
     const { name } = data;
-    fetch("/applications", {
+    return fetch("/applications", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -21,7 +21,10 @@ class ApplicationAdd extends Component {
   render() {
     return (
       <div>
-        <ApplicationForm onSubmit={this.handleAddSubmit} />
+        <ApplicationForm
+          onSubmit={this.handleAddSubmit}
+          returnUrl="/applications"
+        />
       </div>
     );
   }

@@ -98,6 +98,7 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" component={ApplicationList} />
+          <Route exact path="/applications" component={ApplicationList} />
           <Route path="/applications/add" component={ApplicationAdd} />
           <Route path="/about" component={About} />
           <Route component={Error404} />

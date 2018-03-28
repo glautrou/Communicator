@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
+import { Redirect } from "react-router";
 import PropTypes from "prop-types";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
@@ -10,6 +11,7 @@ class ApplicationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fireRedirectToApplicationsPage: false,
       name: "",
       touched: {
         name: false
@@ -53,7 +55,11 @@ class ApplicationForm extends Component {
     for (var error in errors) if (errors[error]) isValid = false;
 
     if (isValid) {
-      this.props.onSubmit(this.state);
+      this.props.onSubmit(this.state).then(res =>
+        this.setState({
+          fireRedirectToApplicationsPage: true
+        })
+      );
     } else {
       alert("Invalid data");
     }
@@ -62,6 +68,9 @@ class ApplicationForm extends Component {
   render() {
     return (
       <div>
+        {this.state.fireRedirectToApplicationsPage && (
+          <Redirect to={this.props.returnUrl || "/"} />
+        )}
         <h2>Application</h2>
         <form onSubmit={this.handleSubmit} noValidate>
           <TextField
